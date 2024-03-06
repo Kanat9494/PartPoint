@@ -12,7 +12,7 @@
     <ShellContent
         Shell.NavBarIsVisible="False"
         Shell.TabBarIsVisible="False"
-        ContentTemplate="{DataTemplate auth:SignInPage}"
+        ContentTemplate="{DataTemplate auth:AuthenticationPage}"
         Route="SignInPage"/>
 
     <TabBar>

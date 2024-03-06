@@ -1,8 +1,8 @@
 ﻿namespace PartPoint.ViewModels.Auth;
 
-public class SignInViewModel : BaseViewModel
+public class AuthenticationViewModel : BaseViewModel
 {
-    public SignInViewModel(IAuthService authService)
+    public AuthenticationViewModel(IAuthService authService)
     {
         SignInCommand = new AsyncRelayCommand(OnSignIn);
         _authService = authService;
