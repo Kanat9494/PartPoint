@@ -5,56 +5,108 @@
              xmlns:borderlessEntry="clr-namespace:PartPoint.Views.CustomControls"
              xmlns:viewModels="clr-namespace:PartPoint.ViewModels.Auth"
              xmlns:commons="clr-namespace:PartPoint.Views.Commons"
+             xmlns:authTemplate="clr-namespace:PartPoint.Views.TemplateSelectors"
              Title="Авторизация">
-    <!--<ScrollView>
-        <Grid>
-            <Border VerticalOptions="Center" BackgroundColor="{x:StaticResource DarkPink50}" HeightRequest="300"
-                Stroke="Transparent" StrokeShape="RoundRectangle 10">
-                <VerticalStackLayout VerticalOptions="Center" Margin="10">
-                    <Border Margin="0, 0, 0, 15" BackgroundColor="White" Stroke="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
-                        <borderlessEntry:BorderlessEntry Placeholder="Введите логин" Keyboard="Numeric" Text="{Binding UserId}" VerticalOptions="Center"
-                        Margin="10, 0, 0, 0"/>
-                    </Border>
-                    <Button Text="Войти" VerticalOptions="Center" Command="{Binding SignInCommand}" BackgroundColor="{x:StaticResource Green40}"/>
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="signInTab">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="75*"/>
+
+                </Grid.RowDefinitions>
+
+                <VerticalStackLayout VerticalOptions="End" Margin="0, 0, 0, 30">
+                    <Label Text="Добро пожаловать!" FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="20" Margin="10" HorizontalOptions="Center"/>
                 </VerticalStackLayout>
-            </Border>
+                
+                <Border Grid.Row="1" Margin="-5"
+                    Stroke="Transparent" StrokeShape="RoundRectangle 30, 30, 0, 0" >
+                    <VerticalStackLayout VerticalOptions="Center" Margin="15">
 
-            <commons:OnConditionView OnCondition="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthenticationViewModel}}, Path=IsBusy}">
-                <commons:OnConditionView.BuildView>
-                    <Border x:Name="activityBorder" VerticalOptions="Center" HeightRequest="120" WidthRequest="120" Stroke="Transparent"
-                        StrokeShape="RoundRectangle 15">
-                        <ActivityIndicator IsRunning="{Binding IsBusy}" HeightRequest="50" WidthRequest="50" Color="{x:StaticResource Green40}"/>
-                    </Border>
-                </commons:OnConditionView.BuildView>
-            </commons:OnConditionView>
+                        <Border Margin="0, 0, 0, 15" BackgroundColor="White" Stroke="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
+                            <borderlessEntry:BorderlessEntry Placeholder="Введите логин" Keyboard="Numeric" Text="{Binding UserId}" VerticalOptions="Center"
+                                Margin="10, 0, 0, 0"/>
+                        </Border>
+                        <Border Margin="0, 0, 0, 15" BackgroundColor="White" Stroke="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
+                            <borderlessEntry:BorderlessEntry Placeholder="Введите логин" Keyboard="Numeric" Text="{Binding UserId}" VerticalOptions="Center"
+                                Margin="10, 0, 0, 0"/>
+                        </Border>
+                        <Button Text="Войти" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthenticationViewModel}}, Path=SignInCommand}" BackgroundColor="{x:StaticResource Pink100}"/>
+
+                        <Label Text="Забыли пароль?" HorizontalOptions="Center" Margin="0, 30, 0, 0" FontAttributes="Bold"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <commons:OnConditionView OnCondition="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthenticationViewModel}}, Path=IsBusy}"
+                    >
+                    <commons:OnConditionView.BuildView>
+                        <Border x:Name="activityBorder" VerticalOptions="Center" HeightRequest="120" WidthRequest="120" Stroke="Transparent"
+                            StrokeShape="RoundRectangle 15" Background="#A0000000" >
+                            <ActivityIndicator IsRunning="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthenticationViewModel}}, Path=IsBusy}" HeightRequest="50" WidthRequest="50" Color="{x:StaticResource Green40}"/>
+                        </Border>
+                    </commons:OnConditionView.BuildView>
+                </commons:OnConditionView>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="signOutTab">
+            <Grid>
+                <Border VerticalOptions="Center" BackgroundColor="{x:StaticResource Red50}" HeightRequest="300"
+                    Stroke="Transparent" StrokeShape="RoundRectangle 10">
+                    <VerticalStackLayout VerticalOptions="Center" Margin="10">
+                        <Border Margin="0, 0, 0, 15" BackgroundColor="White" Stroke="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
+                            <borderlessEntry:BorderlessEntry Placeholder="Введите логин" Keyboard="Numeric" Text="{Binding UserId}" VerticalOptions="Center"
+                        Margin="10, 0, 0, 0"/>
+                        </Border>
+                        <Button Text="Войти" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthenticationViewModel}}, Path=SignInCommand}" BackgroundColor="{x:StaticResource Green40}"/>
+                    </VerticalStackLayout>
+                </Border>
+
+                <commons:OnConditionView OnCondition="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthenticationViewModel}}, Path=IsBusy}">
+                    <commons:OnConditionView.BuildView>
+                        <Border x:Name="activityBorder" VerticalOptions="Center" HeightRequest="120" WidthRequest="120" Stroke="Transparent"
+                            StrokeShape="RoundRectangle 15" Background="#A0000000">
+                            <ActivityIndicator IsRunning="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthenticationViewModel}}, Path=IsBusy}" HeightRequest="50" WidthRequest="50" Color="{x:StaticResource Green40}"/>
+                        </Border>
+                    </commons:OnConditionView.BuildView>
+                </commons:OnConditionView>
+            </Grid>
+        </DataTemplate>
+
+        <authTemplate:AuthUISelector x:Key="authUISelector" SignInTemplate="{StaticResource signInTab}" SignOutTemplate="{StaticResource signOutTab}"/>
+
+    </ContentPage.Resources>
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="97"/>
+                <RowDefinition Height="1"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"/>
+                <ColumnDefinition Width="50*"/>
+
+            </Grid.ColumnDefinitions>
+            
+            <Label Text="Вход" TextColor="White" Margin="0, 0, 20, 5" FontAttributes="Bold" FontSize="20" Grid.Row="0" VerticalOptions="End"
+                   HorizontalOptions="Center" x:Name="firstTabTitle"/>
+            <BoxView Grid.Row="1" Grid.Column="0" x:Name="firstTab" Margin="10, 0, 10, 0"/>
+            <Label Text="Регистрация" TextColor="White" Margin="20, 0, 0, 5" FontAttributes="Bold" FontSize="20" VerticalOptions="End" Grid.Column="1"
+                HorizontalOptions="Center" x:Name="secondTabTitle"/>
+            <BoxView Grid.Row="1" Grid.Column="1" x:Name="secondTab" Margin="10, 0, 10, 0"/>
+
         </Grid>
-    </ScrollView>-->
-
-    <CarouselView x:Name="authTabCV" Loop="False" ItemsSource="{Binding AuthTabs}">
-        <CarouselView.ItemTemplate>
-            <DataTemplate>
-                <Grid>
-                    <Border VerticalOptions="Center" BackgroundColor="{x:StaticResource DarkPink50}" HeightRequest="300"
-                        Stroke="Transparent" StrokeShape="RoundRectangle 10">
-                        <VerticalStackLayout VerticalOptions="Center" Margin="10">
-                            <Border Margin="0, 0, 0, 15" BackgroundColor="White" Stroke="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
-                                <borderlessEntry:BorderlessEntry Placeholder="Введите логин" Keyboard="Numeric" Text="{Binding UserId}" VerticalOptions="Center"
-                                    Margin="10, 0, 0, 0"/>
-                            </Border>
-                            <Button Text="Войти" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthenticationViewModel}}, Path=SignInCommand}" BackgroundColor="{x:StaticResource Green40}"/>
-                        </VerticalStackLayout>
-                    </Border>
-
-                    <commons:OnConditionView OnCondition="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthenticationViewModel}}, Path=IsBusy}">
-                        <commons:OnConditionView.BuildView>
-                            <Border x:Name="activityBorder" VerticalOptions="Center" HeightRequest="120" WidthRequest="120" Stroke="Transparent"
-                                StrokeShape="RoundRectangle 15" Background="#A0000000">
-                                <ActivityIndicator IsRunning="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthenticationViewModel}}, Path=IsBusy}" HeightRequest="50" WidthRequest="50" Color="{x:StaticResource Green40}"/>
-                            </Border>
-                        </commons:OnConditionView.BuildView>
-                    </commons:OnConditionView>
-                </Grid>
-            </DataTemplate>
-        </CarouselView.ItemTemplate>
-    </CarouselView>
+        
+        <CarouselView x:Name="authTabCV" Loop="False" ItemsSource="{Binding AuthTabs}" ItemTemplate="{StaticResource authUISelector}" Grid.Row="1" PositionChanged="OnPositionChanged"/>
+    </Grid>
 </ContentPage>
