@@ -6,7 +6,7 @@
              xmlns:viewModels="clr-namespace:PartPoint.ViewModels.Auth"
              xmlns:commons="clr-namespace:PartPoint.Views.Commons"
              Title="Авторизация">
-    <ScrollView>
+    <!--<ScrollView>
         <Grid>
             <Border VerticalOptions="Center" BackgroundColor="{x:StaticResource DarkPink50}" HeightRequest="300"
                 Stroke="Transparent" StrokeShape="RoundRectangle 10">
@@ -28,5 +28,33 @@
                 </commons:OnConditionView.BuildView>
             </commons:OnConditionView>
         </Grid>
-    </ScrollView>
+    </ScrollView>-->
+
+    <CarouselView x:Name="authTabCV" Loop="False" ItemsSource="{Binding AuthTabs}">
+        <CarouselView.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Border VerticalOptions="Center" BackgroundColor="{x:StaticResource DarkPink50}" HeightRequest="300"
+                        Stroke="Transparent" StrokeShape="RoundRectangle 10">
+                        <VerticalStackLayout VerticalOptions="Center" Margin="10">
+                            <Border Margin="0, 0, 0, 15" BackgroundColor="White" Stroke="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
+                                <borderlessEntry:BorderlessEntry Placeholder="Введите логин" Keyboard="Numeric" Text="{Binding UserId}" VerticalOptions="Center"
+                                    Margin="10, 0, 0, 0"/>
+                            </Border>
+                            <Button Text="Войти" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthenticationViewModel}}, Path=SignInCommand}" BackgroundColor="{x:StaticResource Green40}"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <commons:OnConditionView OnCondition="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthenticationViewModel}}, Path=IsBusy}">
+                        <commons:OnConditionView.BuildView>
+                            <Border x:Name="activityBorder" VerticalOptions="Center" HeightRequest="120" WidthRequest="120" Stroke="Transparent"
+                                StrokeShape="RoundRectangle 15" Background="#A0000000">
+                                <ActivityIndicator IsRunning="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthenticationViewModel}}, Path=IsBusy}" HeightRequest="50" WidthRequest="50" Color="{x:StaticResource Green40}"/>
+                            </Border>
+                        </commons:OnConditionView.BuildView>
+                    </commons:OnConditionView>
+                </Grid>
+            </DataTemplate>
+        </CarouselView.ItemTemplate>
+    </CarouselView>
 </ContentPage>

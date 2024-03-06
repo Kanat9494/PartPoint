@@ -6,8 +6,11 @@ global using PartPoint.Services.Implementations;
 global using PartPoint.Views.Auth;
 global using System.Windows.Input;
 global using CommunityToolkit.Mvvm.Input;
-global using Microsoft.Maui.Controls.Compatibility.Platform.Android;
 global using PartPoint.Views.CustomControls;
+global using System.Collections.ObjectModel;
+global using CommunityToolkit.Maui;
+
+
 
 
 

@@ -8,7 +8,7 @@ public partial class AuthenticationPage : ContentPage
 
         _authService = authService;
 
-        activityBorder.BackgroundColor = Color.FromRgba(0, 0, 0, 160);
+        //activityBorder.BackgroundColor = Color.FromRgba(0, 0, 0, 160);
 
         BindingContext = new AuthenticationViewModel(authService);
     }

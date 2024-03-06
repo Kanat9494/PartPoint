@@ -1,4 +1,8 @@
-﻿namespace PartPoint
+﻿#if ANDROID
+using Microsoft.Maui.Controls.Compatibility.Platform.Android;
+#endif
+
+namespace PartPoint
 {
     public partial class App : Application
     {

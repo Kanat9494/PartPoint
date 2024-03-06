@@ -6,9 +6,16 @@ public class AuthenticationViewModel : BaseViewModel
     {
         SignInCommand = new AsyncRelayCommand(OnSignIn);
         _authService = authService;
+        AuthTabs = new ObservableCollection<string>
+        {
+            "Вход",
+            "Регистрация",
+        };
     }
 
     private readonly IAuthService _authService;
+
+    public ObservableCollection<string> AuthTabs { get; set; }
 
     public ICommand SignInCommand { get; }
 
