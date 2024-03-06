@@ -8,15 +8,12 @@ public partial class SignInPage : ContentPage
 
         _authService = authService;
 
-        BindingContext = new SignInViewModel();
+        activityBorder.BackgroundColor = Color.FromRgba(0, 0, 0, 160);
+
+        BindingContext = new SignInViewModel(authService);
 	}
 
     private readonly IAuthService _authService;
-
-    private async void OnCounterClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//MainPage");
-    }
 
     protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
