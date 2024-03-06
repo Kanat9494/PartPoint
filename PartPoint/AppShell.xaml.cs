@@ -1,10 +1,16 @@
-﻿namespace PartPoint
+﻿namespace PartPoint;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+
+        RegisterRoutingPages();
+    }
+
+    private void RegisterRoutingPages()
+    {
+        Routing.RegisterRoute(nameof(AccountPage), typeof(AccountPage));
     }
 }
