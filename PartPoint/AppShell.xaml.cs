@@ -11,6 +11,5 @@ public partial class AppShell : Shell
 
     private void RegisterRoutingPages()
     {
-        Routing.RegisterRoute(nameof(AccountPage), typeof(AccountPage));
     }
 }

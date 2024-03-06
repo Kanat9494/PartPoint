@@ -4,27 +4,28 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PartPoint"
-    xmlns:views="clr-namespace:PartPoint.Views"
+    xmlns:auth="clr-namespace:PartPoint.Views.Auth"
+    xmlns:main="clr-namespace:PartPoint.Views.Main"
     Shell.FlyoutBehavior="Disabled"
     Title="PartPoint">
 
     <ShellContent
         Shell.NavBarIsVisible="False"
         Shell.TabBarIsVisible="False"
-        ContentTemplate="{DataTemplate views:SignInPage}"
+        ContentTemplate="{DataTemplate auth:SignInPage}"
         Route="SignInPage"/>
 
     <TabBar>
         <ShellContent
             Title="Главная"
-            ContentTemplate="{DataTemplate views:MainPage}"
+            ContentTemplate="{DataTemplate main:MainPage}"
             Route="MainPage"
             Shell.NavBarIsVisible="False"
             Icon="home_icon.png"/>
 
         <ShellContent
             Title="Корзина"
-            ContentTemplate="{DataTemplate views:MainPage}"
+            ContentTemplate="{DataTemplate main:AccountPage}"
             Route="ShoppingCartPage"
             Shell.NavBarIsVisible="False"
             Icon="shopping_cart_icon.png"/>
@@ -32,7 +33,7 @@
 
         <ShellContent
             Title="Аккаунт"
-            ContentTemplate="{DataTemplate views:AccountPage}"
+            ContentTemplate="{DataTemplate main:AccountPage}"
             Route="Account" 
             Shell.NavBarIsVisible="False"
             Icon="account_icon.png"/>

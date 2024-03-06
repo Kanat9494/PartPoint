@@ -1,4 +1,4 @@
-namespace PartPoint.Views;
+namespace PartPoint.Views.Main;
 
 public partial class AccountPage : ContentPage
 {
