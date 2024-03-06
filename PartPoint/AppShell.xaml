@@ -21,14 +21,14 @@
             ContentTemplate="{DataTemplate main:MainPage}"
             Route="MainPage"
             Shell.NavBarIsVisible="False"
-            Icon="home_icon.png"/>
+            Icon="{OnPlatform home_icon.png, iOS=resized_home_icon.png}"/>
 
         <ShellContent
-            Title="Корзина"
+            Title="Избранные"
             ContentTemplate="{DataTemplate main:AccountPage}"
             Route="ShoppingCartPage"
             Shell.NavBarIsVisible="False"
-            Icon="shopping_cart_icon.png"/>
+            Icon="{OnPlatform heart.png, iOS=resized_heart.png}"/>
 
 
         <ShellContent
@@ -36,7 +36,7 @@
             ContentTemplate="{DataTemplate main:AccountPage}"
             Route="Account" 
             Shell.NavBarIsVisible="False"
-            Icon="account_icon.png"/>
+            Icon="{OnPlatform account_icon.png, iOS=resized_account_icon.png}"/>
     </TabBar>
 
 </Shell>
