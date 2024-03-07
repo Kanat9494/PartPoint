@@ -7,6 +7,8 @@ public partial class AccountPage : ContentPage
 		InitializeComponent();
 
 		_authService = authService;
+
+        BindingContext = new AccountViewModel(authService);
 	}
 
     private readonly IAuthService _authService;

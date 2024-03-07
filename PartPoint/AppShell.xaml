@@ -25,7 +25,7 @@
 
         <ShellContent
             Title="Избранные"
-            ContentTemplate="{DataTemplate main:AccountPage}"
+            ContentTemplate="{DataTemplate main:ShoppingCartPage}"
             Route="ShoppingCartPage"
             Shell.NavBarIsVisible="False"
             Icon="{OnPlatform heart.png, iOS=resized_heart.png}"/>

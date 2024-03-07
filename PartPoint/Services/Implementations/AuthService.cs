@@ -50,7 +50,5 @@ public class AuthService : IAuthService
         await SecureStorage.Default.SetAsync("authState", authState);
         HasUserAuthenticated = false;
         UserId = "0";
-
-        await Shell.Current.GoToAsync($"{nameof(AuthenticationPage)}");
     }
 }
