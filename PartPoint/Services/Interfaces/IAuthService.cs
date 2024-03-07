@@ -2,7 +2,9 @@
 
 public interface IAuthService
 {
-    Task IsUserAuthenticated();
-    Task SignIn(string authState, string userId);
+    public bool HasUserAuthenticated { get; set; }
+    public string UserId { get; set; }
+    bool IsUserAuthenticated();
+    Task<bool> SignIn(string userName, string password);
     Task SignOut(string authState);
 }

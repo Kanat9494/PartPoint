@@ -6,23 +6,12 @@ public partial class AuthenticationPage : ContentPage
 	{
 		InitializeComponent();
 
-        _authService = authService;
-
         firstTab.BackgroundColor = Color.FromArgb("#00cc00");
         secondTab.BackgroundColor = Colors.Transparent;
         firstTabTitle.TextColor = Color.FromArgb("#00cc00");
         secondTabTitle.TextColor = Colors.Black;
 
         BindingContext = new AuthenticationViewModel(authService);
-    }
-
-    private readonly IAuthService _authService;
-
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
-    {
-        base.OnNavigatedTo(args);
-
-        Task.Run(_authService.IsUserAuthenticated).Wait();
     }
 
     void OnPositionChanged(object sender, PositionChangedEventArgs e)

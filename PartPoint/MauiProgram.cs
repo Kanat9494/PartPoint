@@ -10,6 +10,7 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .RegisterAppServices()
+            .RegisterViewModels()
             .RegisterViews()
             .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
@@ -36,6 +37,15 @@ public static class MauiProgram
     public static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder)
     {
         mauiAppBuilder.Services.AddTransient<AuthenticationPage>();
+        mauiAppBuilder.Services.AddSingleton<AccountPage>();
+        mauiAppBuilder.Services.AddSingleton<MainPage>();
+
+        return mauiAppBuilder;
+    }
+
+    public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
+    {
+        mauiAppBuilder.Services.AddSingleton<AccountViewModel>();
 
         return mauiAppBuilder;
     }

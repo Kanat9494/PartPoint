@@ -9,6 +9,9 @@ global using CommunityToolkit.Mvvm.Input;
 global using PartPoint.Views.CustomControls;
 global using System.Collections.ObjectModel;
 global using CommunityToolkit.Maui;
+global using PartPoint.Views.Main;
+global using PartPoint.ViewModels.Main;
+
 
 
 

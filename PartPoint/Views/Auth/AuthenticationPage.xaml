@@ -6,7 +6,9 @@
              xmlns:viewModels="clr-namespace:PartPoint.ViewModels.Auth"
              xmlns:commons="clr-namespace:PartPoint.Views.Commons"
              xmlns:authTemplate="clr-namespace:PartPoint.Views.TemplateSelectors"
-             Title="Авторизация">
+             Title="Авторизация"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="True">
 
     <ContentPage.Resources>
         <DataTemplate x:Key="signInTab">
@@ -26,11 +28,11 @@
                     <VerticalStackLayout VerticalOptions="Center" Margin="15">
 
                         <Border Margin="0, 0, 0, 15" BackgroundColor="White" Stroke="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
-                            <borderlessEntry:BorderlessEntry Placeholder="Введите логин" Keyboard="Numeric" Text="{Binding UserId}" VerticalOptions="Center"
+                            <borderlessEntry:BorderlessEntry Placeholder="Введите логин" Text="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthenticationViewModel}}, Path=UserName}" VerticalOptions="Center"
                                 Margin="10, 0, 0, 0"/>
                         </Border>
                         <Border Margin="0, 0, 0, 15" BackgroundColor="White" Stroke="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
-                            <borderlessEntry:BorderlessEntry Placeholder="Введите логин" Keyboard="Numeric" Text="{Binding UserId}" VerticalOptions="Center"
+                            <borderlessEntry:BorderlessEntry Placeholder="Введите пароль" Text="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthenticationViewModel}}, Path=Password}" VerticalOptions="Center"
                                 Margin="10, 0, 0, 0"/>
                         </Border>
                         <Button Text="Войти" VerticalOptions="Center" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthenticationViewModel}}, Path=SignInCommand}" BackgroundColor="{x:StaticResource Pink100}"/>
@@ -40,7 +42,7 @@
                 </Border>
 
                 <commons:OnConditionView OnCondition="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AuthenticationViewModel}}, Path=IsBusy}"
-                    >
+                    Grid.RowSpan="2">
                     <commons:OnConditionView.BuildView>
                         <Border x:Name="activityBorder" VerticalOptions="Center" HeightRequest="120" WidthRequest="120" Stroke="Transparent"
                             StrokeShape="RoundRectangle 15" Background="#A0000000" >

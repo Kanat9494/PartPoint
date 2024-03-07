@@ -1,28 +1,56 @@
-﻿namespace PartPoint.Services.Implementations;
+﻿using Org.Apache.Http.Authentication;
+
+namespace PartPoint.Services.Implementations;
 
 public class AuthService : IAuthService
 {
-    public async Task IsUserAuthenticated()
+    public string UserId { get; set; } = "0";
+    public bool HasUserAuthenticated { get; set; } = false;
+    public bool IsUserAuthenticated()
     {
-        var isUserAuthenticated = await SecureStorage.Default.GetAsync("authState") ?? "0";
+        var isUserAuthenticated = "0";
+
+        Task.Run(async () =>
+        {
+            isUserAuthenticated = await SecureStorage.Default.GetAsync("authState") ?? "0";
+        }).Wait();
 
 
         if (isUserAuthenticated.Equals("1"))
-            await Shell.Current.GoToAsync("//MainPage");
+        {
+            HasUserAuthenticated = true;
+            Task.Run(async () =>
+            {
+                UserId = await SecureStorage.Default.GetAsync("userId") ?? "0";
+            }).Wait();
+
+            return true;
+        }
+
+        return false;
     }
 
-    public async Task SignIn(string authState, string userId)
+    public async Task<bool> SignIn(string userName, string password)
     {
-        await SecureStorage.Default.SetAsync("authState", authState);
-        await SecureStorage.Default.SetAsync("userId", userId);
+        if (userName == "test" && password == "123")
+        {
+            await SecureStorage.Default.SetAsync("userName", userName);
+            await SecureStorage.Default.SetAsync("userId", "2");
+            await SecureStorage.Default.SetAsync("authState", "1");
+            this.UserId = "2";
+            HasUserAuthenticated = true;
+            return true;
+        }
 
-        await Shell.Current.GoToAsync("//MainPage");
+        return false;
     }
 
     public async Task SignOut(string authState)
     {
         await SecureStorage.Default.SetAsync("authState", authState);
+        HasUserAuthenticated = false;
+        UserId = "0";
 
-        await Shell.Current.GoToAsync("//SignInPage");
+        await Shell.Current.GoToAsync($"{nameof(AuthenticationPage)}");
     }
 }

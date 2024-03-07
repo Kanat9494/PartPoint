@@ -9,11 +9,11 @@
     Shell.FlyoutBehavior="Disabled"
     Title="PartPoint">
 
-    <ShellContent
+    <!--<ShellContent
         Shell.NavBarIsVisible="False"
         Shell.TabBarIsVisible="False"
         ContentTemplate="{DataTemplate auth:AuthenticationPage}"
-        Route="SignInPage"/>
+        Route="SignInPage"/>-->
 
     <TabBar>
         <ShellContent
@@ -34,7 +34,7 @@
         <ShellContent
             Title="Аккаунт"
             ContentTemplate="{DataTemplate main:AccountPage}"
-            Route="Account" 
+            Route="AccountPage" 
             Shell.NavBarIsVisible="False"
             Icon="{OnPlatform account_icon.png, iOS=resized_account_icon.png}"/>
     </TabBar>
