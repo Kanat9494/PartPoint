@@ -24,16 +24,7 @@ public partial class AccountPage : ContentPage
         }
         else
         {
-            var isAuthenticated = _authService.IsUserAuthenticated();
-
-            if (isAuthenticated)
-            {
-
-            }
-            else
-            {
-                await Shell.Current.GoToAsync($"{nameof(AuthenticationPage)}");
-            }
+            await Shell.Current.GoToAsync($"{nameof(AuthenticationPage)}");
         }
     }
 }

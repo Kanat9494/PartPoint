@@ -1,6 +1,4 @@
-﻿using Org.Apache.Http.Authentication;
-
-namespace PartPoint.Services.Implementations;
+﻿namespace PartPoint.Services.Implementations;
 
 public class AuthService : IAuthService
 {

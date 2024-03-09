@@ -46,6 +46,7 @@ public static class MauiProgram
     public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
     {
         mauiAppBuilder.Services.AddSingleton<AccountViewModel>();
+        mauiAppBuilder.Services.AddSingleton<MainViewModel>();
 
         return mauiAppBuilder;
     }
