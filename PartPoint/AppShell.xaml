@@ -9,12 +9,6 @@
     Shell.FlyoutBehavior="Disabled"
     Title="PartPoint">
 
-    <!--<ShellContent
-        Shell.NavBarIsVisible="False"
-        Shell.TabBarIsVisible="False"
-        ContentTemplate="{DataTemplate auth:AuthenticationPage}"
-        Route="SignInPage"/>-->
-
     <TabBar>
         <ShellContent
             Title="Главная"
