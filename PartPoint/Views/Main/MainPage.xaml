@@ -5,6 +5,7 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:borderlessEntry="clr-namespace:PartPoint.Views.CustomControls"
              xmlns:commons="clr-namespace:PartPoint.Views.Commons"
+             xmlns:viewModels="clr-namespace:PartPoint.ViewModels.Main"
              Title="MainPage">
     <ContentPage.Behaviors>
         <toolkit:StatusBarBehavior StatusBarColor="{x:StaticResource Green35}"/>
@@ -23,6 +24,14 @@
             </Border>
         </Grid>
 
-        <commons:ContentListSkeleton Grid.Row="1"/>
+        <commons:OnConditionView Grid.Row="1" OnCondition="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=IsBusy}">
+            <commons:OnConditionView.BuildView>
+                <commons:ContentListSkeleton Grid.Row="1"/>
+            </commons:OnConditionView.BuildView>
+
+            <commons:OnConditionView.DestroyView>
+                <Label Text="Все загружено"/>
+            </commons:OnConditionView.DestroyView>
+        </commons:OnConditionView>
     </Grid>
 </ContentPage>
