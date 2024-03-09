@@ -11,6 +11,8 @@ global using System.Collections.ObjectModel;
 global using CommunityToolkit.Maui;
 global using PartPoint.Views.Main;
 global using PartPoint.ViewModels.Main;
+global using PartPoint.Models;
+
 
 
 
