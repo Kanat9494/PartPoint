@@ -12,6 +12,10 @@ global using CommunityToolkit.Maui;
 global using PartPoint.Views.Main;
 global using PartPoint.ViewModels.Main;
 global using PartPoint.Models;
+global using PartPoint.Views.FiltersAndSearch;
+global using PartPoint.ViewModels.FiltersAndSearch;
+
+
 
 
 

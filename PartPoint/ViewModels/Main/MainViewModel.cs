@@ -10,12 +10,16 @@ public class MainViewModel : BaseViewModel
         Products = new ObservableCollection<Product>();
         TopProducts = new ObservableCollection<TopProduct>();
         Categories = new ObservableCollection<Category>();
+        FilterCommand = new AsyncRelayCommand(OnFilter);
 
 
         Task.Run(InitializeContent);
     }
 
     private readonly IAuthService _authService;
+
+    public ICommand FilterCommand { get; }
+
     public ObservableCollection<Product> Products { get; set; }
     public ObservableCollection<TopProduct> TopProducts { get; set; }
     public ObservableCollection<Category> Categories { get; set; }
@@ -57,5 +61,10 @@ public class MainViewModel : BaseViewModel
         }
 
         IsBusy = false;
+    }
+
+    async Task OnFilter()
+    {
+        await Shell.Current.GoToAsync($"{nameof(FiltersPage)}");
     }
 }

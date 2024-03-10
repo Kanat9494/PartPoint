@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PartPoint.Views.FiltersAndSearch.FiltersPage"
+             Title="Фильтр"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False"
+             xmlns:commons="clr-namespace:PartPoint.Views.Commons"
+             xmlns:viewModels="clr-namespace:PartPoint.ViewModels.FiltersAndSearch"
+             xmlns:models="clr-namespace:PartPoint.Models">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Picker x:Name="categorySelector" Title="Выберите категорию" SelectedItem="{Binding SelectedCategory}"
+            SelectedIndexChanged="OnPickerSelectedIndexChanged" Margin="10, 0, 10, 0">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Автозапчасти</x:String>
+                    <x:String>Услуги СТО</x:String>
+
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <commons:OnConditionView Grid.Row="1" OnCondition="{Binding Source={RelativeSource AncestorType={x:Type viewModels:FiltersViewModel}}, Path=IsBusy}">
+            <commons:OnConditionView.BuildView>
+                <CollectionView ItemsSource="{Binding Categories}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Category">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="1"/>
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding Name}" Margin="10, 0, 10, 5" FontSize="16" 
+                                    FontFamily="OpenSansRegular" VerticalOptions="End"/>
+                                <BoxView Margin="10, 0, 10, 0" HeightRequest="1" Color="#999999" Grid.Row="1"/>
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:FiltersViewModel}}, Path=SelectCategoryCommand}" CommandParameter="{Binding Level}"/>
+                                </Grid.GestureRecognizers>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </commons:OnConditionView.BuildView>
+
+            <commons:OnConditionView.DestroyView>
+                <Label Text="Destroyed"/>
+            </commons:OnConditionView.DestroyView>
+        </commons:OnConditionView>
+    </Grid>
+</ContentPage>
