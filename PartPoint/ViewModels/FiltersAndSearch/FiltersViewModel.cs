@@ -10,9 +10,11 @@ public class FiltersViewModel : BaseViewModel
         };
 
         SelectCategoryCommand = new AsyncRelayCommand<int>(OnSelectCategory);
+        SearchCommand = new AsyncRelayCommand(OnSearch);
     }
 
     public ICommand SelectCategoryCommand { get; }
+    public ICommand SearchCommand { get; }
 
     private string _selectedCategory;
     public string SelectedCategory
@@ -98,5 +100,10 @@ public class FiltersViewModel : BaseViewModel
         {
             IsBusy = false;
         }
+    }
+
+    async Task OnSearch()
+    {
+        await Shell.Current.GoToAsync(nameof(SearchResultPage));
     }
 }

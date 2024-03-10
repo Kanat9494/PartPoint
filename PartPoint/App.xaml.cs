@@ -23,6 +23,13 @@ namespace PartPoint
 			    handler.PlatformView.BorderStyle = UIKit.UITextBorderStyle.None;
 #endif
             });
+
+            Microsoft.Maui.Handlers.PickerHandler.Mapper.AppendToMapping(nameof(BorderlessPicker), (handler, view) =>
+            {
+#if ANDROID
+                handler.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToAndroid());
+#endif
+            });
         }
     }
 }

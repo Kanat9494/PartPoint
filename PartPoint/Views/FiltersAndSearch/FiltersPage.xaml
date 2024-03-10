@@ -7,23 +7,26 @@
              Shell.TabBarIsVisible="False"
              xmlns:commons="clr-namespace:PartPoint.Views.Commons"
              xmlns:viewModels="clr-namespace:PartPoint.ViewModels.FiltersAndSearch"
-             xmlns:models="clr-namespace:PartPoint.Models">
+             xmlns:models="clr-namespace:PartPoint.Models"
+             xmlns:customControls="clr-namespace:PartPoint.Views.CustomControls">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Picker x:Name="categorySelector" Title="Выберите категорию" SelectedItem="{Binding SelectedCategory}"
-            SelectedIndexChanged="OnPickerSelectedIndexChanged" Margin="10, 0, 10, 0">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Автозапчасти</x:String>
-                    <x:String>Услуги СТО</x:String>
+        <Border Margin="10, 5, 10, 5" BackgroundColor="Transparent" StrokeShape="RoundRectangle 10">
+            <customControls:BorderlessPicker x:Name="categorySelector" Title="Выберите категорию" SelectedItem="{Binding SelectedCategory}"
+                SelectedIndexChanged="OnPickerSelectedIndexChanged" VerticalOptions="Center" Margin="10, 0, 10, 0">
+                <customControls:BorderlessPicker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Автозапчасти</x:String>
+                        <x:String>Услуги СТО</x:String>
 
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
+                    </x:Array>
+                </customControls:BorderlessPicker.ItemsSource>
+            </customControls:BorderlessPicker>
+        </Border>
 
         <commons:OnConditionView Grid.Row="1" OnCondition="{Binding Source={RelativeSource AncestorType={x:Type viewModels:FiltersViewModel}}, Path=IsBusy}">
             <commons:OnConditionView.BuildView>
@@ -49,7 +52,48 @@
             </commons:OnConditionView.BuildView>
 
             <commons:OnConditionView.DestroyView>
-                <Label Text="Destroyed"/>
+                <ScrollView>
+                    <VerticalStackLayout>
+                        <Border Margin="10, 5, 10, 5" BackgroundColor="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
+                            <customControls:BorderlessPicker Title="Выберите состояние" VerticalOptions="Center"
+                                Margin="10, 0, 10, 0">
+                                <customControls:BorderlessPicker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Привозное</x:String>
+                                        <x:String>Новое</x:String>
+                                    </x:Array>
+                                </customControls:BorderlessPicker.ItemsSource>
+                            </customControls:BorderlessPicker>
+                        </Border>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*"/>
+                                <ColumnDefinition Width="50*"/>
+
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="55"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="Цена от:" FontFamily="OpenSansSemibold" Margin="10, 0, 10, 5"
+                                VerticalOptions="End"/>
+                            <Border Background="Transparent" StrokeShape="RoundRectangle 10" Grid.Row="1" Margin="10, 0, 10, 0">
+                                <customControls:BorderlessEntry Placeholder="От" VerticalOptions="Center" Keyboard="Numeric" Margin="10, 0, 0, 0"/>
+                            </Border>
+
+                            <Label Grid.Row="0" Grid.Column="1" Text="Цена до:" FontFamily="OpenSansSemibold" Margin="10, 0, 10, 5"
+                                VerticalOptions="End"/>
+                            <Border Background="Transparent" StrokeShape="RoundRectangle 10" Grid.Row="1" Margin="10, 0, 10, 0"
+                                Grid.Column="1">
+                                <customControls:BorderlessEntry Placeholder="До" VerticalOptions="Center" Keyboard="Numeric" Margin="10, 0, 0, 0"/>
+                            </Border>
+                        </Grid>
+
+                        <Button Text="Поиск" Margin="10" FontSize="18" FontFamily="OpenSansSemibold" Command="{Binding SearchCommand}"/>
+                    </VerticalStackLayout>
+                </ScrollView>
             </commons:OnConditionView.DestroyView>
         </commons:OnConditionView>
     </Grid>
