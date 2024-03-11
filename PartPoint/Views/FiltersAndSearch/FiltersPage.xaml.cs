@@ -21,8 +21,12 @@ public partial class FiltersPage : ContentPage
 			var text = picker.Items[selectedIndex];
 			if (text == "Автозапчасти")
 			{
-				_viewModel.InitializeSubCategories(1, 1);
+				_viewModel.InitializeAutoPartView();
 			}
+			else
+			{
+				_viewModel.InitializeTSSView();
+            }
 		}
 	}
 }

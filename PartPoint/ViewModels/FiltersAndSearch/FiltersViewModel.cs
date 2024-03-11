@@ -4,128 +4,79 @@ public class FiltersViewModel : BaseViewModel
 {
     public FiltersViewModel()
     {
-        Categories = new ObservableCollection<Category>()
-        {
-            
-        };
+        IsAutoPartView = true;
+        Categories = new ObservableCollection<Category>();
         Filters = new ObservableCollection<Category>();
 
-        SelectCategoryCommand = new AsyncRelayCommand<int>(OnSelectCategory);
         SearchCommand = new AsyncRelayCommand(OnSearch);
+        InitializeCategories();
     }
 
-    public ICommand SelectCategoryCommand { get; }
     public ICommand SearchCommand { get; }
 
-    private string _selectedCategory;
-    public string SelectedCategory
-    {
-        get => _selectedCategory;
-        set => SetProperty(ref _selectedCategory, value);
-    }
     public ObservableCollection<Category> Categories { get; set; }
     public ObservableCollection<Category> Filters { get; set; }
 
-    internal protected void InitializeSubCategories(int level, int categoryId)
+
+    private Category _selectedCategory;
+    public Category SelectedCategory
     {
-        IsBusy = true;
-        Categories.Clear();
-        Filters.Clear();
-
-        Filters.Add(new Category
-        {
-            CategoryId = 1,
-            Name = "Все в категории авто"
-        });
-
-        if (level == 1)
-        {
-            Categories.Add(new Category
+        get => _selectedCategory;
+        set 
+        { 
+            if (value.CategoryId == 1)
             {
-                CategoryId = 1,
-                Name = "Toyota",
-                Level = 2
-            });
-        }
-        else if (level == 2)
-        {
-
-        }
-        for (int i = 0; i < 30; i++)
-        {
-            Categories.Add(new Category
+                try
+                {
+                    IsAutoPartView = true;
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
+                }
+                SetProperty(ref _selectedCategory, value);
+            }
+            else
             {
-                CategoryId = i,
-                Name = "Toyota",
-                Level = 2
-            });
+                IsAutoPartView = false;
+                SetProperty(ref _selectedCategory, value);
+            }
         }
     }
-
-    private async Task OnSelectCategory(int level)
+    private bool _isAutoPartView;
+    public bool IsAutoPartView
     {
-        if (level == 2)
+        get => _isAutoPartView;
+        set => SetProperty(ref _isAutoPartView, value);
+    }
+
+    private void InitializeCategories()
+    {
+        Categories.Add(new Category
         {
-            Categories.Clear();
+            CategoryId = 1,
+            Name = "Автозапчасти"
+        });
 
-            Categories.Add(new Category
-            {
-                CategoryId = 1,
-                Name = "Все в категории Toyota",
-                Level = 3
-            });
-
-            Filters.Add(new Category
-            {
-                CategoryId = 1,
-                Name = "Avensis"
-            });
-
-            for (int i = 0; i < 50; i++)
-            {
-                Categories.Add(new Category
-                {
-                    CategoryId = i,
-                    Name = "Avensis",
-                    Level = 3
-                });
-            }
-        }
-        else if (level == 3)
+        Categories.Add(new Category
         {
-            Categories.Clear();
-
-            Filters.Add(new Category
-            {
-                CategoryId = 1,
-                Name = "Кузовные детали"
-            });
-
-            Categories.Add(new Category
-            {
-                CategoryId = 1,
-                Name = "Все в категории Avensis",
-                Level = 4
-            });
-
-            for (int i = 0; i < 50; i++)
-            {
-                Categories.Add(new Category
-                {
-                    CategoryId = i,
-                    Name = "Кузовные детали",
-                    Level = 4
-                });
-            }
-        }
-        else if (level == 4)
-        {
-            IsBusy = false;
-        }
+            CategoryId = 2,
+            Name = "Услуги СТО"
+        });
+    }
+    
+    protected internal void InitializeAutoPartView()
+    {
+        IsAutoPartView = true;
     }
 
     async Task OnSearch()
     {
         await Shell.Current.GoToAsync(nameof(SearchResultPage));
+    }
+
+    internal void InitializeTSSView()
+    {
+        IsAutoPartView = false;
     }
 }

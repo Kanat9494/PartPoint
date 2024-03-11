@@ -20,22 +20,103 @@
 
         <Border Margin="10, 5, 10, 5" BackgroundColor="Transparent" StrokeShape="RoundRectangle 10" Grid.Row="1">
             <customControls:BorderlessPicker x:Name="categorySelector" Title="Выберите категорию" SelectedItem="{Binding SelectedCategory}"
-                SelectedIndexChanged="OnPickerSelectedIndexChanged" VerticalOptions="Center" Margin="10, 0, 10, 0">
-                <customControls:BorderlessPicker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Автозапчасти</x:String>
-                        <x:String>Услуги СТО</x:String>
-
-                    </x:Array>
-                </customControls:BorderlessPicker.ItemsSource>
+                VerticalOptions="Center" Margin="10, 0, 10, 0" ItemsSource="{Binding Categories}"
+                ItemDisplayBinding="{Binding Name}">
             </customControls:BorderlessPicker>
         </Border>
 
-        
-
-        <commons:OnConditionView Grid.Row="2" OnCondition="{Binding Source={RelativeSource AncestorType={x:Type viewModels:FiltersViewModel}}, Path=IsBusy}">
+        <commons:OnConditionView Grid.Row="2" OnCondition="{Binding Source={RelativeSource AncestorType={x:Type viewModels:FiltersViewModel}}, Path=IsAutoPartView}">
             <commons:OnConditionView.BuildView>
-                <CollectionView ItemsSource="{Binding Categories}">
+                <ScrollView Grid.Row="2">
+                    <VerticalStackLayout>
+                        <customControls:BorderlessPicker Title="Марка авто" SelectedItem="{Binding SelectedCategory}"
+                            VerticalOptions="Center" Margin="10, 0, 10, 0">
+                            <customControls:BorderlessPicker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Тойота</x:String>
+                                    <x:String>BMW</x:String>
+                                </x:Array>
+                            </customControls:BorderlessPicker.ItemsSource>
+                        </customControls:BorderlessPicker>
+
+                        <customControls:BorderlessPicker Title="Модель авто" SelectedItem="{Binding SelectedCategory}"
+                            VerticalOptions="Center" Margin="10, 0, 10, 0">
+                            <customControls:BorderlessPicker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Avensis</x:String>
+                                    <x:String>Ist</x:String>
+                                </x:Array>
+                            </customControls:BorderlessPicker.ItemsSource>
+                        </customControls:BorderlessPicker>
+
+                        <customControls:BorderlessPicker Title="Запчасти" SelectedItem="{Binding SelectedCategory}"
+                            VerticalOptions="Center" Margin="10, 0, 10, 0">
+                            <customControls:BorderlessPicker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Кузовные детали</x:String>
+                                    <x:String>Двигатель</x:String>
+                                    <x:String>Ходовые</x:String>
+                                </x:Array>
+                            </customControls:BorderlessPicker.ItemsSource>
+                        </customControls:BorderlessPicker>
+
+                        <Label Text="Состояние:" Margin="10, 10, 10, 0" FontFamily="OpenSansSemibold" FontSize="16"/>
+                        <Grid Margin="10, 5, 10, 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="90*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+
+                            <CheckBox Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" Color="{StaticResource Green40}"/>
+                            <Label Text="Новое" Grid.Row="0" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" />
+
+                            <CheckBox Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" Color="{StaticResource Green40}"/>
+                            <Label Text="Б/У" Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center"/>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50*"/>
+                                <ColumnDefinition Width="50*"/>
+
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="55"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Text="Цена от:" FontFamily="OpenSansSemibold" Margin="10, 0, 10, 5"
+                                VerticalOptions="End"/>
+                            <Border Background="Transparent" StrokeShape="RoundRectangle 10" Grid.Row="1" Margin="10, 0, 10, 0">
+                                <customControls:BorderlessEntry Placeholder="От" VerticalOptions="Center" Keyboard="Numeric" Margin="10, 0, 0, 0"/>
+                            </Border>
+
+                            <Label Grid.Row="0" Grid.Column="1" Text="Цена до:" FontFamily="OpenSansSemibold" Margin="10, 0, 10, 5"
+                                VerticalOptions="End"/>
+                            <Border Background="Transparent" StrokeShape="RoundRectangle 10" Grid.Row="1" Margin="10, 0, 10, 0"
+                                Grid.Column="1">
+                                <customControls:BorderlessEntry Placeholder="До" VerticalOptions="Center" Keyboard="Numeric" Margin="10, 0, 0, 0"/>
+                            </Border>
+                        </Grid>
+
+                        <Button Text="Поиск" Margin="10" FontSize="18" FontFamily="OpenSansSemibold" Command="{Binding SearchCommand}"/>
+                    </VerticalStackLayout>
+                </ScrollView>
+            </commons:OnConditionView.BuildView>
+
+            <commons:OnConditionView.DestroyView>
+                <Label Text="Услуги СТО"/>
+            </commons:OnConditionView.DestroyView>
+        </commons:OnConditionView>
+
+        <!--<commons:OnConditionView Grid.Row="2" OnCondition="{Binding Source={RelativeSource AncestorType={x:Type viewModels:FiltersViewModel}}, Path=IsBusy}">
+            <commons:OnConditionView.BuildView>
+                --><!--<CollectionView ItemsSource="{Binding Categories}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:Category">
                             <Grid>
@@ -48,12 +129,24 @@
                                 <BoxView Margin="10, 0, 10, 0" HeightRequest="1" Color="#999999" Grid.Row="1"/>
 
                                 <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:FiltersViewModel}}, Path=SelectCategoryCommand}" CommandParameter="{Binding Level}"/>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:FiltersViewModel}}, Path=SelectCategoryCommand}" CommandParameter="{Binding CategoryId}"/>
                                 </Grid.GestureRecognizers>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
-                </CollectionView>
+                </CollectionView>--><!--
+                <Border Margin="10, 5, 10, 5" BackgroundColor="Transparent" StrokeShape="RoundRectangle 10">
+                    <customControls:BorderlessPicker Title="Выберите категорию" SelectedItem="{Binding SelectedCategory}"
+                        SelectedIndexChanged="OnPickerSelectedIndexChanged" VerticalOptions="Center" Margin="10, 0, 10, 0">
+                        <customControls:BorderlessPicker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Автозапчасти</x:String>
+                                <x:String>Услуги СТО</x:String>
+
+                            </x:Array>
+                        </customControls:BorderlessPicker.ItemsSource>
+                    </customControls:BorderlessPicker>
+                </Border>
             </commons:OnConditionView.BuildView>
             <commons:OnConditionView.DestroyView>
                 <ScrollView>
@@ -75,7 +168,7 @@
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                         
-                        <!--<Border Margin="10, 5, 10, 5" BackgroundColor="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
+                        --><!--<Border Margin="10, 5, 10, 5" BackgroundColor="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
                             <customControls:BorderlessPicker Title="Выберите состояние" VerticalOptions="Center"
                                 Margin="10, 0, 10, 0">
                                 <customControls:BorderlessPicker.ItemsSource>
@@ -85,7 +178,7 @@
                                     </x:Array>
                                 </customControls:BorderlessPicker.ItemsSource>
                             </customControls:BorderlessPicker>
-                        </Border>-->
+                        </Border>--><!--
                         <Label Text="Состояние:" Margin="10, 10, 10, 0" FontFamily="OpenSansSemibold" FontSize="16"/>
                         <Grid Margin="10, 5, 10, 5">
                             <Grid.ColumnDefinitions>
@@ -134,6 +227,6 @@
                     </VerticalStackLayout>
                 </ScrollView>
             </commons:OnConditionView.DestroyView>
-        </commons:OnConditionView>
+        </commons:OnConditionView>-->
     </Grid>
 </ContentPage>
