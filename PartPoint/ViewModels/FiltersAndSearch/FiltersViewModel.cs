@@ -8,6 +8,7 @@ public class FiltersViewModel : BaseViewModel
         {
             
         };
+        Filters = new ObservableCollection<Category>();
 
         SelectCategoryCommand = new AsyncRelayCommand<int>(OnSelectCategory);
         SearchCommand = new AsyncRelayCommand(OnSearch);
@@ -23,17 +24,26 @@ public class FiltersViewModel : BaseViewModel
         set => SetProperty(ref _selectedCategory, value);
     }
     public ObservableCollection<Category> Categories { get; set; }
+    public ObservableCollection<Category> Filters { get; set; }
 
     internal protected void InitializeSubCategories(int level, int categoryId)
     {
         IsBusy = true;
         Categories.Clear();
+        Filters.Clear();
+
+        Filters.Add(new Category
+        {
+            CategoryId = 1,
+            Name = "Все в категории авто"
+        });
+
         if (level == 1)
         {
             Categories.Add(new Category
             {
                 CategoryId = 1,
-                Name = "Все в категории авто",
+                Name = "Toyota",
                 Level = 2
             });
         }
@@ -65,6 +75,12 @@ public class FiltersViewModel : BaseViewModel
                 Level = 3
             });
 
+            Filters.Add(new Category
+            {
+                CategoryId = 1,
+                Name = "Avensis"
+            });
+
             for (int i = 0; i < 50; i++)
             {
                 Categories.Add(new Category
@@ -78,6 +94,12 @@ public class FiltersViewModel : BaseViewModel
         else if (level == 3)
         {
             Categories.Clear();
+
+            Filters.Add(new Category
+            {
+                CategoryId = 1,
+                Name = "Кузовные детали"
+            });
 
             Categories.Add(new Category
             {

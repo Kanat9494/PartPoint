@@ -11,11 +11,14 @@
              xmlns:customControls="clr-namespace:PartPoint.Views.CustomControls">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Margin="10, 5, 10, 5" BackgroundColor="Transparent" StrokeShape="RoundRectangle 10">
+        <Label Text="Очистить" FontSize="16" FontAttributes="Bold" HorizontalOptions="End" Margin="0, 10, 10, 0"/>
+
+        <Border Margin="10, 5, 10, 5" BackgroundColor="Transparent" StrokeShape="RoundRectangle 10" Grid.Row="1">
             <customControls:BorderlessPicker x:Name="categorySelector" Title="Выберите категорию" SelectedItem="{Binding SelectedCategory}"
                 SelectedIndexChanged="OnPickerSelectedIndexChanged" VerticalOptions="Center" Margin="10, 0, 10, 0">
                 <customControls:BorderlessPicker.ItemsSource>
@@ -28,7 +31,9 @@
             </customControls:BorderlessPicker>
         </Border>
 
-        <commons:OnConditionView Grid.Row="1" OnCondition="{Binding Source={RelativeSource AncestorType={x:Type viewModels:FiltersViewModel}}, Path=IsBusy}">
+        
+
+        <commons:OnConditionView Grid.Row="2" OnCondition="{Binding Source={RelativeSource AncestorType={x:Type viewModels:FiltersViewModel}}, Path=IsBusy}">
             <commons:OnConditionView.BuildView>
                 <CollectionView ItemsSource="{Binding Categories}">
                     <CollectionView.ItemTemplate>
@@ -50,11 +55,27 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </commons:OnConditionView.BuildView>
-
             <commons:OnConditionView.DestroyView>
                 <ScrollView>
                     <VerticalStackLayout>
-                        <Border Margin="10, 5, 10, 5" BackgroundColor="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
+                        <CollectionView ItemsSource="{Binding Filters}">
+                            <CollectionView.Header>
+                                <Label Text="Фильтры" Margin="10, 10, 0, 0" FontFamily="OpenSansSemibold" FontSize="16"/>
+                            </CollectionView.Header>
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Span="2" Orientation="Vertical"/>
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:Category">
+                                    <Border StrokeShape="RoundRectangle 10" Margin="5, 10, 5, 0" Padding="10" Background="Transparent">
+                                        <Label Text="{Binding Name}" HorizontalOptions="Center"/>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        
+                        <!--<Border Margin="10, 5, 10, 5" BackgroundColor="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
                             <customControls:BorderlessPicker Title="Выберите состояние" VerticalOptions="Center"
                                 Margin="10, 0, 10, 0">
                                 <customControls:BorderlessPicker.ItemsSource>
@@ -64,7 +85,25 @@
                                     </x:Array>
                                 </customControls:BorderlessPicker.ItemsSource>
                             </customControls:BorderlessPicker>
-                        </Border>
+                        </Border>-->
+                        <Label Text="Состояние:" Margin="10, 10, 10, 0" FontFamily="OpenSansSemibold" FontSize="16"/>
+                        <Grid Margin="10, 5, 10, 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="90*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+
+                            <CheckBox Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" Color="{StaticResource Green40}"/>
+                            <Label Text="Новое" Grid.Row="0" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center" />
+
+                            <CheckBox Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" Color="{StaticResource Green40}"/>
+                            <Label Text="Б/У" Grid.Row="1" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Center"/>
+                        </Grid>
 
                         <Grid>
                             <Grid.ColumnDefinitions>

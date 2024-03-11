@@ -24,7 +24,7 @@
                 <ColumnDefinition Width="85*"/>
                 <ColumnDefinition Width="15*"/>
             </Grid.ColumnDefinitions>
-            <Border Margin="10, 5, 10, 5" StrokeShape="RoundRectangle 10" Stroke="Transparent">
+            <Border Margin="10, 5, 0, 5" StrokeShape="RoundRectangle 10" Stroke="Transparent">
                 <borderlessEntry:BorderlessEntry Placeholder="Поиск" VerticalOptions="Center"
                     Margin="10, 0, 0, 0"/>
             </Border>
@@ -36,7 +36,7 @@
                 </Label.GestureRecognizers>
             </Label>-->
             <Image Grid.Column="1" VerticalOptions="Center" Source="white_filter.png" HeightRequest="30" WidthRequest="30"
-                HorizontalOptions="Start">
+                HorizontalOptions="Center">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding FilterCommand}"/>
                 </Image.GestureRecognizers>
