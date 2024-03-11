@@ -14,19 +14,18 @@ public partial class FiltersPage : ContentPage
 	void OnPickerSelectedIndexChanged(object sender, EventArgs e)
 	{
 		var picker = (Picker)sender;
-		int selectedIndex = picker.SelectedIndex;
+		var selectedItem = (Category)picker.SelectedItem;
 
-		if (selectedIndex != -1)
+		if (selectedItem != null)
 		{
-			var text = picker.Items[selectedIndex];
-			if (text == "Автозапчасти")
+			if (selectedItem.CategoryId == 1)
 			{
 				_viewModel.InitializeAutoPartView();
 			}
 			else
 			{
 				_viewModel.InitializeTSSView();
-            }
+			}
 		}
 	}
 }

@@ -21,7 +21,7 @@
         <Border Margin="10, 5, 10, 5" BackgroundColor="Transparent" StrokeShape="RoundRectangle 10" Grid.Row="1">
             <customControls:BorderlessPicker x:Name="categorySelector" Title="Выберите категорию" SelectedItem="{Binding SelectedCategory}"
                 VerticalOptions="Center" Margin="10, 0, 10, 0" ItemsSource="{Binding Categories}"
-                ItemDisplayBinding="{Binding Name}">
+                ItemDisplayBinding="{Binding Name}" SelectedIndexChanged="OnPickerSelectedIndexChanged">
             </customControls:BorderlessPicker>
         </Border>
 
@@ -29,36 +29,21 @@
             <commons:OnConditionView.BuildView>
                 <ScrollView Grid.Row="2">
                     <VerticalStackLayout>
-                        <customControls:BorderlessPicker Title="Марка авто" SelectedItem="{Binding SelectedCategory}"
-                            VerticalOptions="Center" Margin="10, 0, 10, 0">
-                            <customControls:BorderlessPicker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Тойота</x:String>
-                                    <x:String>BMW</x:String>
-                                </x:Array>
-                            </customControls:BorderlessPicker.ItemsSource>
-                        </customControls:BorderlessPicker>
+                        <Border Margin="10, 5, 10, 5" Background="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
+                            <customControls:BorderlessPicker Title="Марка авто" SelectedItem="{Binding SelectedCarBrand}"
+                                VerticalOptions="Center" Margin="10, 0, 10, 0" ItemsSource="{Binding CarBrands}" ItemDisplayBinding="{Binding Name}"/>
+                        </Border>
 
-                        <customControls:BorderlessPicker Title="Модель авто" SelectedItem="{Binding SelectedCategory}"
-                            VerticalOptions="Center" Margin="10, 0, 10, 0">
-                            <customControls:BorderlessPicker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Avensis</x:String>
-                                    <x:String>Ist</x:String>
-                                </x:Array>
-                            </customControls:BorderlessPicker.ItemsSource>
-                        </customControls:BorderlessPicker>
+                        <Border Margin="10, 5, 10, 5" Background="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
+                            <customControls:BorderlessPicker Title="Модель авто" SelectedItem="{Binding SelectedCarModel}"
+                                VerticalOptions="Center" Margin="10, 0, 10, 0" ItemsSource="{Binding CarModels}" ItemDisplayBinding="{Binding Name}"/>
+                        </Border>
 
-                        <customControls:BorderlessPicker Title="Запчасти" SelectedItem="{Binding SelectedCategory}"
-                            VerticalOptions="Center" Margin="10, 0, 10, 0">
-                            <customControls:BorderlessPicker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Кузовные детали</x:String>
-                                    <x:String>Двигатель</x:String>
-                                    <x:String>Ходовые</x:String>
-                                </x:Array>
-                            </customControls:BorderlessPicker.ItemsSource>
-                        </customControls:BorderlessPicker>
+                        <Border Margin="10, 5, 10, 5" Background="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
+                            <customControls:BorderlessPicker Title="Запчасти" SelectedItem="{Binding SelectedAutoPart}"
+                                VerticalOptions="Center" Margin="10, 0, 10, 0" ItemDisplayBinding="{Binding Name}"
+                                ItemsSource="{Binding AutoParts}"/>
+                        </Border>
 
                         <Label Text="Состояние:" Margin="10, 10, 10, 0" FontFamily="OpenSansSemibold" FontSize="16"/>
                         <Grid Margin="10, 5, 10, 5">
