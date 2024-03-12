@@ -19,7 +19,7 @@
 
         <ShellContent
             Title="Избранные"
-            ContentTemplate="{DataTemplate main:ShoppingCartPage}"
+            ContentTemplate="{DataTemplate main:FavoritesPage}"
             Route="ShoppingCartPage"
             Shell.NavBarIsVisible="False"
             Icon="{OnPlatform heart.png, iOS=resized_heart.png}"/>
