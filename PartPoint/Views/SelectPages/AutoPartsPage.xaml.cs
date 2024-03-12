@@ -2,8 +2,10 @@ namespace PartPoint.Views.SelectPages;
 
 public partial class AutoPartsPage : ContentPage
 {
-	public AutoPartsPage()
+	public AutoPartsPage(FiltersViewModel viewModel)
 	{
 		InitializeComponent();
+
+		BindingContext = new AutoPartsViewModel(viewModel);
 	}
 }
