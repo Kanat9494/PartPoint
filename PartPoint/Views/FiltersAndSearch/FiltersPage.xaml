@@ -30,19 +30,27 @@
                 <ScrollView Grid.Row="2">
                     <VerticalStackLayout>
                         <Border Margin="10, 5, 10, 5" Background="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
-                            <customControls:BorderlessPicker Title="Марка авто" SelectedItem="{Binding SelectedCarBrand}"
-                                VerticalOptions="Center" Margin="10, 0, 10, 0" ItemsSource="{Binding CarBrands}" ItemDisplayBinding="{Binding Name}"/>
+                            <Label Text="{Binding SelectedCarBrand.Name}" VerticalOptions="Center" Margin="10, 0, 0, 0"/>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CarBrandsCommand}"/>
+                            </Border.GestureRecognizers>
                         </Border>
 
                         <Border Margin="10, 5, 10, 5" Background="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
-                            <customControls:BorderlessPicker Title="Модель авто" SelectedItem="{Binding SelectedCarModel}"
-                                VerticalOptions="Center" Margin="10, 0, 10, 0" ItemsSource="{Binding CarModels}" ItemDisplayBinding="{Binding Name}"/>
+                            <!--<customControls:BorderlessPicker Title="Модель авто" SelectedItem="{Binding SelectedCarModel}"
+                                VerticalOptions="Center" Margin="10, 0, 10, 0" ItemsSource="{Binding CarModels}" ItemDisplayBinding="{Binding Name}"/>-->
+                            <Label Text="{Binding SelectedCarModel.Name}" VerticalOptions="Center" Margin="10, 0, 0, 0"/>
+
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CarModelsCommand}"/>
+                            </Border.GestureRecognizers>
                         </Border>
 
                         <Border Margin="10, 5, 10, 5" Background="Transparent" StrokeShape="RoundRectangle 10" HeightRequest="50">
-                            <customControls:BorderlessPicker Title="Запчасти" SelectedItem="{Binding SelectedAutoPart}"
+                            <!--<customControls:BorderlessPicker Title="Запчасти" SelectedItem="{Binding SelectedAutoPart}"
                                 VerticalOptions="Center" Margin="10, 0, 10, 0" ItemDisplayBinding="{Binding Name}"
-                                ItemsSource="{Binding AutoParts}"/>
+                                ItemsSource="{Binding AutoParts}"/>-->
+                            <Label Text="{Binding SelectedAutoPart.Name}" Margin="10, 0, 0, 0" VerticalOptions="Center"/>
                         </Border>
 
                         <Label Text="Состояние:" Margin="10, 10, 10, 0" FontFamily="OpenSansSemibold" FontSize="16"/>

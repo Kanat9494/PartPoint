@@ -6,15 +6,37 @@ public class FiltersViewModel : BaseViewModel
     {
         IsAutoPartView = true;
         Categories = new ObservableCollection<Category>();
-        CarBrands = new ObservableCollection<CarBrand>();
+        SelectedCategory = new Category
+        {
+            CategoryId = 1,
+            Name = "Автозапчасти"
+        };
+        SelectedCarBrand = new CarBrand
+        {
+            Name = "Марка авто"
+        };
+        SelectedCarModel = new CarModel
+        {
+            Name = "Модель авто"
+        };
+        SelectedAutoPart = new AutoPart
+        {
+            Name = "Запчасти"
+        };
         CarModels = new ObservableCollection<CarModel>();
         AutoParts = new ObservableCollection<AutoPart>();
 
         SearchCommand = new AsyncRelayCommand(OnSearch);
+        CarBrandsCommand = new AsyncRelayCommand(OnCarBrands);
+        CarModelsCommand = new AsyncRelayCommand(OnCarModels);
         InitializeCategories();
     }
 
     public ICommand SearchCommand { get; }
+    public ICommand CarBrandsCommand { get; }
+    public ICommand CarModelsCommand { get; }
+
+    protected internal bool _isCarBrandView;
 
     public ObservableCollection<Category> Categories { get; set; }
     public ObservableCollection<CarBrand> CarBrands { get; set; }
@@ -38,18 +60,9 @@ public class FiltersViewModel : BaseViewModel
     public CarBrand SelectedCarBrand
     {
         get => _selectedCarBrand;
-        set
-        {
-            if (_selectedCarBrand != value)
-            {
-                SetProperty(ref _selectedCarBrand, value);
-                Task.Run(async () =>
-                {
-                    await LoadCarModels(value.CarBrandId);
-                });
-            }
-        }
+        set => SetProperty(ref _selectedCarBrand, value);
     }
+    
     private CarModel _selectedCarModel;
     public CarModel SelectedCarModel
     {
@@ -97,33 +110,9 @@ public class FiltersViewModel : BaseViewModel
     protected internal void InitializeAutoPartView()
     {
         IsAutoPartView = true;
-        LoadCarBrands();
     }
 
-    private void LoadCarBrands()
-    {
-        for (int i = 0; i < 50; i++)
-        {
-            CarBrands.Add(new CarBrand
-            {
-                CarBrandId = i,
-                Name = $"Toyota {i}"
-            });
-        }
-    }
-    async Task LoadCarModels(int carBrandId)
-    {
-        for (int i = 0; i < 50; i++)
-        {
-            CarModels.Add(new CarModel
-            {
-                CarModelId = i,
-                Name = $"Avensis {i}",
-                CarBrandId = carBrandId
-            });
-        }
-    }
-
+    
     private async Task LoadAutoParts(int carModelId)
     {
         for (int i = 0; i < 50; i++)
@@ -145,5 +134,18 @@ public class FiltersViewModel : BaseViewModel
     internal void InitializeTSSView()
     {
         IsAutoPartView = false;
+    }
+
+    private async Task OnCarBrands()
+    {
+        _isCarBrandView = true;
+        await App.Current.MainPage.Navigation.PushModalAsync(new CarBrandsAndModelsPage(this));
+    }
+    async Task OnCarModels()
+    {
+        if (SelectedCarBrand == null || SelectedCarBrand.CarBrandId == 0)
+            return;
+        _isCarBrandView = false;
+        await App.Current.MainPage.Navigation.PushModalAsync(new CarBrandsAndModelsPage(this));
     }
 }

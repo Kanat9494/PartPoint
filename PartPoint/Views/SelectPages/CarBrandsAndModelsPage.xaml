@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PartPoint.Views.SelectPages.CarBrandsAndModelsPage"
+             xmlns:commons="clr-namespace:PartPoint.Views.Commons"
+             xmlns:viewModels="clr-namespace:PartPoint.ViewModels.SelectPages"
+             xmlns:models="clr-namespace:PartPoint.Models"
+             Title="CarBrandsAndModelsPage">
+    <commons:OnConditionView OnCondition="{Binding Source={RelativeSource AncestorType={x:Type viewModels:CarBrandsAndModelsViewModel}}, Path=IsCarBrandView}"
+        Margin="0, 15, 0, 0">
+        <commons:OnConditionView.BuildView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="75"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border Margin="10" Background="Transparent" StrokeShape="RoundRectangle 10">
+                    <Label Text="Все в категории Авто" VerticalOptions="Center" Margin="10, 0, 0, 0" FontAttributes="Bold" FontSize="16"/>
+                </Border>
+                <CollectionView ItemsSource="{Binding CarBrands}" Grid.Row="1" Margin="0, 10, 0, 0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:CarBrand">
+                            <VerticalStackLayout HeightRequest="45" Margin="10, 0, 10, 0">
+                                <Label Text="{Binding Name}"/>
+                                <BoxView HeightRequest="1" Margin="0, 5, 0, 0"/>
+
+                                <VerticalStackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:CarBrandsAndModelsViewModel}}, Path=CarBrandTapped}"
+                                        CommandParameter="{Binding CarBrandId}"/>
+                                </VerticalStackLayout.GestureRecognizers>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </commons:OnConditionView.BuildView>
+
+        <commons:OnConditionView.DestroyView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="75"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border Margin="10" Background="Transparent" StrokeShape="RoundRectangle 10">
+                    <Label Text="Все в категории Avensis" VerticalOptions="Center" Margin="10, 0, 0, 0" FontAttributes="Bold" FontSize="16"/>
+                </Border>
+                <CollectionView ItemsSource="{Binding CarModels}" Grid.Row="1" Margin="0, 10, 0, 0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:CarModel">
+                            <VerticalStackLayout HeightRequest="45" Margin="10, 0, 10, 0">
+                                <Label Text="{Binding Name}"/>
+                                <BoxView HeightRequest="1" Margin="0, 5, 0, 0"/>
+
+                                <VerticalStackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:CarBrandsAndModelsViewModel}}, Path=CarModelCommand}"
+                                        CommandParameter="{Binding CarModelId}"/>
+                                </VerticalStackLayout.GestureRecognizers>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </commons:OnConditionView.DestroyView>
+    </commons:OnConditionView>
+</ContentPage>

@@ -14,6 +14,10 @@ global using PartPoint.ViewModels.Main;
 global using PartPoint.Models;
 global using PartPoint.Views.FiltersAndSearch;
 global using PartPoint.ViewModels.FiltersAndSearch;
+global using PartPoint.ViewModels.SelectPages;
+global using PartPoint.Views.SelectPages;
+
+
 
 
 
