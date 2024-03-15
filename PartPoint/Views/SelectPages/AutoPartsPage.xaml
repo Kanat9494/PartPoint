@@ -19,7 +19,7 @@
                 <DataTemplate x:DataType="models:AutoPart">
                     <VerticalStackLayout HeightRequest="45" Margin="10, 0, 10, 0">
                         <Label Text="{Binding Name}"/>
-                        <BoxView HeightRequest="1" Margin="0, 5, 0, 0"/>
+                        <BoxView HeightRequest="1" Margin="0, 5, 0, 0" Color="#999999"/>
 
                         <VerticalStackLayout.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AutoPartsViewModel}}, Path=AutoPartCommand}"
