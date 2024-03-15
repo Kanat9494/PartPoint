@@ -8,7 +8,7 @@
              xmlns:models="clr-namespace:PartPoint.Models"
              xmlns:viewModels="clr-namespace:PartPoint.ViewModels.Main"
              xmlns:templateSelectors="clr-namespace:PartPoint.Views.TemplateSelectors"
-             Shell.TabBarIsVisible="False"
+             Shell.NavBarIsVisible="False"
              Title="Главная">
     <ContentPage.Behaviors>
         <toolkit:StatusBarBehavior StatusBarColor="{x:StaticResource Green35}"/>
