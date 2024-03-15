@@ -61,7 +61,7 @@
                             <StackLayout BackgroundColor="{StaticResource White}" CompressedLayout.IsHeadless="True">
                                 <CollectionView ItemsSource="{Binding Categories}">
                                     <CollectionView.ItemsLayout>
-                                        <GridItemsLayout Orientation="Vertical" Span="2"/>
+                                        <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="5" />
                                     </CollectionView.ItemsLayout>
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate x:DataType="models:Category">
