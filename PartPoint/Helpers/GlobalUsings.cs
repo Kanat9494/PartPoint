@@ -16,6 +16,12 @@ global using PartPoint.Views.FiltersAndSearch;
 global using PartPoint.ViewModels.FiltersAndSearch;
 global using PartPoint.ViewModels.SelectPages;
 global using PartPoint.Views.SelectPages;
+global using CustomShellMaui;
+global using CustomShellMaui.Models;
+global using CustomShellMaui.Enum;
+
+
+
 
 
 

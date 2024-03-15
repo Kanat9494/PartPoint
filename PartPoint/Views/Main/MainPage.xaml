@@ -46,6 +46,9 @@
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding FilterCommand}"/>
                 </Image.GestureRecognizers>
+                <!--<Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="GoToSecondPage"/>
+                </Image.GestureRecognizers>-->
             </Image>
         </Grid>
 

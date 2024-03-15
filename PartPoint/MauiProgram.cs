@@ -12,6 +12,7 @@ public static class MauiProgram
             .RegisterAppServices()
             .RegisterViewModels()
             .RegisterViews()
+            .UseCustomShellMaui()
             .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {

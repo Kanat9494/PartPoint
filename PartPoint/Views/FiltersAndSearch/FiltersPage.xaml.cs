@@ -28,4 +28,11 @@ public partial class FiltersPage : ContentPage
 			}
 		}
 	}
+
+  //  protected override void OnNavigatedTo(NavigatedToEventArgs args)
+  //  {
+  //      base.OnNavigatedTo(args);
+
+		//Shell.SetTabBarIsVisible(this, false);
+  //  }
 }

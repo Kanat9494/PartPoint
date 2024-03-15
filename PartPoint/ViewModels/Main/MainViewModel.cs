@@ -65,6 +65,23 @@ public class MainViewModel : BaseViewModel
 
     async Task OnFilter()
     {
+        //Shell.Current.CustomShellMaui(new CustomShellMaui.Models.Transitions
+        //{
+        //    Root = new CustomShellMaui.Models.TransitionRoot
+        //    {
+        //        CurrentPage = CustomShellMaui.Enum.TransitionType.FadeOut
+        //    },
+        //    Push = new CustomShellMaui.Models.Transition
+        //    {
+        //        CurrentPage = CustomShellMaui.Enum.TransitionType.None,
+        //        NextPage = CustomShellMaui.Enum.TransitionType.ScaleOut
+        //    },
+        //    Pop = new CustomShellMaui.Models.Transition
+        //    {
+        //        CurrentPage = CustomShellMaui.Enum.TransitionType.ScaleIn,
+        //        NextPage = CustomShellMaui.Enum.TransitionType.None
+        //    }
+        //});
         await Shell.Current.GoToAsync($"{nameof(FiltersPage)}");
     }
 }
