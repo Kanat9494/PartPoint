@@ -17,7 +17,7 @@
     <Grid BackgroundColor="#999999">
         <Grid.Margin>
             <OnPlatform x:TypeArguments="Thickness">
-                <On Platform="iOS" Value="-5, 0, 0, 0"/>
+                <On Platform="iOS" Value="0, -5, 0, 0"/>
             </OnPlatform>
         </Grid.Margin>
         <Grid.RowDefinitions>
