@@ -15,6 +15,11 @@
     </ContentPage.Behaviors>
 
     <Grid BackgroundColor="#999999">
+        <Grid.Margin>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="-5, 0, 0, 0"/>
+            </OnPlatform>
+        </Grid.Margin>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
