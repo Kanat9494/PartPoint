@@ -24,7 +24,7 @@
             <commons:OnConditionView.DestroyView>
                 <CollectionView ItemsSource="{Binding Products}">
                     <CollectionView.Header>
-                        <Label Text="Результаты поиска:" Margin="10" FontFamily="OpenSansSemibold" FontSize="18" HeightRequest="30"/>
+                        <Label Text="Результаты поиска:" Margin="10, 10, 10, 10" FontFamily="OpenSansSemibold" FontSize="18" HeightRequest="30"/>
                     </CollectionView.Header>
 
                     <CollectionView.ItemTemplate>
