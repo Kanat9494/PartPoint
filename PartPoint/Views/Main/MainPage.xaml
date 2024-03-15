@@ -57,44 +57,40 @@
             <commons:OnConditionView.DestroyView>
                 <CollectionView ItemsSource="{Binding Products}">
                     <CollectionView.Header>
-                        <StackLayout CompressedLayout.IsHeadless="True">
-                            <StackLayout BackgroundColor="{StaticResource White}" CompressedLayout.IsHeadless="True">
-                                <CollectionView ItemsSource="{Binding Categories}">
-                                    <CollectionView.ItemsLayout>
-                                        <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="5" />
-                                    </CollectionView.ItemsLayout>
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate x:DataType="models:Category">
-                                            <Border StrokeThickness="0" StrokeShape="RoundRectangle 10" HeightRequest="80" Margin="10">
-                                                <Label Text="{Binding Name}" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center"
-                                                    FontAttributes="Bold"/>
+                        <VerticalStackLayout CompressedLayout.IsHeadless="True">
+                            <CollectionView ItemsSource="{Binding Categories}" BackgroundColor="{StaticResource White}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical" Span="2" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:Category">
+                                        <Border StrokeThickness="0" StrokeShape="RoundRectangle 10" HeightRequest="80" Margin="10">
+                                            <Label Text="{Binding Name}" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center"
+                                            FontAttributes="Bold"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                            <CollectionView ItemsSource="{Binding TopProducts}" BackgroundColor="{StaticResource White}" Margin="0, 5, 0, 0">
+                                <CollectionView.Header>
+                                    <Label Text="Популярные товары и услуги" FontSize="18" FontAttributes="Bold" Margin="10"/>
+                                </CollectionView.Header>
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical" Span="2"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:TopProduct">
+                                        <VerticalStackLayout>
+                                            <Border HeightRequest="100" Margin="5, 5, 5, 5" StrokeThickness="0" StrokeShape="RoundRectangle 10">
+                                                <Image Source="{Binding ImageUrl}" Aspect="AspectFill"/>
                                             </Border>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
-                            </StackLayout>
-
-                            <StackLayout CompressedLayout.IsHeadless="True" Background="{StaticResource White}"
-                                Margin="0, 5, 0, 0">
-                                <Label Text="Популярные товары и услуги" FontSize="18" FontAttributes="Bold" Margin="10"/>
-
-                                <CollectionView ItemsSource="{Binding TopProducts}">
-                                    <CollectionView.ItemsLayout>
-                                        <GridItemsLayout Orientation="Vertical" Span="2"/>
-                                    </CollectionView.ItemsLayout>
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate x:DataType="models:TopProduct">
-                                            <VerticalStackLayout>
-                                                <Border HeightRequest="100" Margin="5, 5, 5, 5" StrokeThickness="0" StrokeShape="RoundRectangle 10">
-                                                    <Image Source="{Binding ImageUrl}" Aspect="AspectFill"/>
-                                                </Border>
-                                                <Label Text="Колесо" Margin="5" FontSize="16"/>
-                                            </VerticalStackLayout>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
-                            </StackLayout>
-                        </StackLayout>
+                                            <Label Text="Колесо" Margin="5" FontSize="16"/>
+                                        </VerticalStackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
                     </CollectionView.Header>
 
                     <CollectionView.ItemTemplate>
